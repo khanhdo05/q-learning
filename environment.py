@@ -1,10 +1,4 @@
-import enum
-
-class Action(enum.Enum):
-    UP = 0
-    DOWN = 1
-    LEFT = 2
-    RIGHT = 3
+from constants import Action
 
 class GridWorld:
     """
@@ -18,9 +12,9 @@ class GridWorld:
         - All other states have reward R = -1
         - State 12 is the initial state
     """
-    def __init__(self, size = 4):
-        self.size = size
-        self.num_states = size * size  # square grid
+    def __init__(self):
+        self.size = 4
+        self.num_states = 16
         self.initial_state = 12
         self.terminal_states = {0, 15}
 
