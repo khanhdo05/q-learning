@@ -1,4 +1,3 @@
-import copy
 from grid import Grid
 
 class GridWorld:
