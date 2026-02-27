@@ -13,12 +13,24 @@ class GridWorld:
         return self.initial_state
     
     def step(self, state, action):
-        pass
+        """
+        Calculate the next state based on the current state and action.
+        If the next state is out of bounds, return the current state.
+        """
+        r, c = divmod(state, self.size)
+        dr, dc = self.actions[action]
+        new_r, new_c = r + dr, c + dc
 
-    def apply_action(self, state, action):
-        pass
+        # if go off the grid, stay in the same state
+        if self.states.is_out_of_bounds(new_r, new_c):
+            return state
+        
+        return new_r * self.size + new_c
 
     def reward(self, state):
+        """
+        R = 1 if state is terminal, R=-1 otherwise
+        """
         if state == self.terminal_states:
             return 1
-        return 0
+        return -1
