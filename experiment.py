@@ -14,7 +14,8 @@ class TestBed:
         """
         Executes E episodes in sequence without restarting Q-values.
         """
-        pass
+        for _ in range(self.E):
+            
 
     def run_experiment(self):
         """
