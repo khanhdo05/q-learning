@@ -18,6 +18,9 @@ class TestBed:
 
         self.env = GridWorld()
 
+        self.total_rewards = np.zeros((num_simulations, E))  # total rewards for each episode in each simulation
+        self.total_durations = np.zeros((num_simulations, E))  # total durations (number of steps) for each episode in each simulation
+
     def _run_simulation(self, agent: QLearningAgent):
         """
         Run a single simulation of E episodes, where the agent interacts with the environment and learns from it.
@@ -27,13 +30,23 @@ class TestBed:
             2. Moves to the next state based on that action.
             3. Updates the Q-value for the state-action pair using the Bellman formula.
             4. Ends the episode if it reaches a terminal state, otherwise continues to the next step.
-        """
-        T = 1  # global clock to count total iterations within a simulation
 
-        for _ in range(self.E):
+        Returns two arrays of length E:
+            - episode_rewards: total reward obtained in each episode
+            - episode_durations: total number of steps taken in each episode
+        """
+        # for each ep, track total reward and duration (number of steps)
+        episode_rewards   = np.zeros(self.E)
+        episode_durations = np.zeros(self.E)
+
+        # global clock to count total iterations within a simulation
+        T = 1  
+
+        for i in range(self.E):
             P = 1  # episode clock to count iterations within the current episode
 
             # make sure to reset env for independent episodes, but not the agent's Q-values
+            state = self.env.reset()
             total_reward = 0
             steps = 0
 
@@ -47,6 +60,11 @@ class TestBed:
                 steps += 1
                 T += 1
                 P += 1
+
+            episode_rewards[i] = total_reward
+            episode_durations[i] = steps
+        
+        return episode_rewards, episode_durations
 
     def run_experiment(self):
         """
@@ -67,4 +85,12 @@ class TestBed:
                 random_seed=rng
             )
             
-            self._run_simulation(agent)
+            rwds, durs = self._run_simulation(agent)
+            self.total_rewards[i] = rwds
+            self.total_durations[i] = durs
+        
+        # average rewards and durations across simulations
+        # save as attributes for data visualization
+        self.avg_rewards = np.mean(self.total_rewards, axis=0)
+        self.avg_durations = np.mean(self.total_durations, axis=0)
+        

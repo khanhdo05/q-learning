@@ -25,6 +25,12 @@ class GridWorld:
         """
         return divmod(state, self.size)
     
+    def _state(self, row: int, col: int):
+        """
+        Convert (row, col) → flat state index.
+        """
+        return row * self.size + col
+    
     def is_terminal(self, state: int):
         """
         Check if a state is terminal.
@@ -49,13 +55,13 @@ class GridWorld:
 
         # calculate next state
         r, c = self._row_col(state)
-        if action == Action.UP:
+        if action == 0:  # UP
             r -= 1
-        elif action == Action.DOWN:
+        elif action == 1:  # DOWN
             r += 1
-        elif action == Action.LEFT:
+        elif action == 2:  # LEFT
             c -= 1
-        elif action == Action.RIGHT:
+        elif action == 3:  # RIGHT
             c += 1
         else:
             raise ValueError("Invalid action")

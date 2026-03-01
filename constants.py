@@ -1,10 +1,10 @@
 import enum
 
 class Action(enum.Enum):
-    UP = 0
-    DOWN = 1
-    LEFT = 2
-    RIGHT = 3
+    0 = 0  # UP
+    1 = 1  # DOWN
+    2 = 2  # LEFT
+    3 = 3  # RIGHT
 
 NUM_SIMS = 10000
 E = 500
