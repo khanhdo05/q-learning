@@ -23,7 +23,8 @@ for exp_id, gamma, alpha, epsilon in EXPERIMENTS:
         alpha            = alpha,
         epsilon          = epsilon,
         num_simulations  = NUM_SIMS,
-        E                = E
+        E                = E,
+        seed             = 31  # just a favorite number for reproducibility :P
     )
 
     testbed.run_experiment()
@@ -33,5 +34,5 @@ for exp_id, gamma, alpha, epsilon in EXPERIMENTS:
         avg_rewards   = testbed.avg_rewards,
         avg_durations = testbed.avg_durations
     )
-    
+
     tracker.plot_results(save=True)
