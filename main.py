@@ -4,9 +4,9 @@ from experiment import TestBed
 from data_viz import DataTracker
 
 # Experiment configurations
-# alpha and exploration_rate can be a float OR the string '1/T' / '1/P'
+# alpha and epsilon can be a float OR the string '1/T' / '1/P'
 EXPERIMENTS = [
-    # exp_id,  gamma, alpha,  exploration_rate
+    # exp_id,  gamma, alpha,  epsilon
     (1,        0.9,   0.1,    0.25),
     (2,        0.9,   '1/T',  '1/T'),
     (3,        0.9,   0.1,    '1/T'),
@@ -15,13 +15,13 @@ EXPERIMENTS = [
     (6,        0.9,   '1/P',  0.1),
 ]
 
-# ── Run ──────────────────────────────────────────────────────────────
-for exp_id, gamma, alpha, exploration_rate in EXPERIMENTS:
+# Run each experiment and generate the required plots
+for exp_id, gamma, alpha, epsilon in EXPERIMENTS:
     testbed = TestBed(
         exp_id           = exp_id,
         gamma            = gamma,
         alpha            = alpha,
-        exploration_rate = exploration_rate,
+        epsilon          = epsilon,
         num_simulations  = NUM_SIMS,
         E                = E
     )
@@ -33,4 +33,5 @@ for exp_id, gamma, alpha, exploration_rate in EXPERIMENTS:
         avg_rewards   = testbed.avg_rewards,
         avg_durations = testbed.avg_durations
     )
+    
     tracker.plot_results(save=True)
