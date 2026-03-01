@@ -1,4 +1,4 @@
-from constants import Action
+from constants import Action, GRID_SIZE, NUM_STATES, TERMINAL_STATES, INITIAL_STATE
 
 class GridWorld:
     """
@@ -13,10 +13,11 @@ class GridWorld:
         - State 12 is the initial state
     """
     def __init__(self):
-        self.size = 4
-        self.num_states = 16
-        self.initial_state = 12
-        self.terminal_states = {0, 15}
+        self.size = GRID_SIZE
+        self.num_actions = len(Action)
+        self.num_states = NUM_STATES
+        self.initial_state = INITIAL_STATE
+        self.terminal_states = TERMINAL_STATES
 
     def _row_col(self, state: int):
         """
