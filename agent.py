@@ -63,3 +63,4 @@ class QLearningAgent:
         Q(state, action) = Q(state, action) + alpha * (reward + gamma * max(Q(next_state)) - Q(state, action))
         """
         alpha = self._resolve_para(self.alpha, T, P)
+        self.q_table[state, action] += alpha * (reward + self.gamma * np.max(self.q_table[next_state]) - self.q_table[state, action])

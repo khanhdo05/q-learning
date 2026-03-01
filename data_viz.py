@@ -7,8 +7,8 @@ class DataTracker:
     """
     def __init__(self, exp_id, avg_rewards, avg_durations):
         self.exp_id = exp_id
-        self.avg_rewards = avg_rewards  # List of average rewards per episode
-        self.avg_durations = avg_durations  # List of average episode durations per episode
+        self.avg_rewards = avg_rewards 
+        self.avg_durations = avg_durations 
         
     def plot_results(self, save=True):
         # Plot 1: Average Reinforcement by Episode number

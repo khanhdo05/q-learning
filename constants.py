@@ -1,13 +1,14 @@
 import enum
 
-class Action(enum.Enum):
-    0 = 0  # UP
-    1 = 1  # DOWN
-    2 = 2  # LEFT
-    3 = 3  # RIGHT
+Action = {
+    0: 'UP',
+    1: 'DOWN',
+    2: 'LEFT',
+    3: 'RIGHT'
+}
 
 NUM_SIMS = 10000
-E = 500
+E = 100
 GRID_SIZE = 4
 NUM_STATES = GRID_SIZE * GRID_SIZE
 INITIAL_STATE = 12
