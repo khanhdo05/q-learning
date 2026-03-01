@@ -14,17 +14,34 @@ class QLearningAgent:
     alpha: learning rate - how much new info overrides old info
     epsilon: exploration rate - probability of taking a random action
     """
-    def __init__(self, env: GridWorld, gamma: str | float, alpha: str | float, epsilon: float):
+    def __init__(self, env: GridWorld, gamma: str | float, alpha: str | float, epsilon: float, random_seed):
         self.env = env
         self.gamma = gamma
         self.alpha = alpha
         self.epsilon = epsilon
+        self.random_seed = random_seed
 
         self.reset()
     
     def reset(self):
         self.q_table = np.zeros((self.env.num_states, 4))  # 4 actions: up, down, left, right
 
+    def _resolve_para(self, para, T, P):
+        """
+        Turn a paramter into a concrete float.
+        It can already by a float or the string '1/T' or '1/P'
+        """
+        if isinstance(para, float) or isinstance(para, int):
+            return float(para)
+        
+        if para == '1/T':
+            return 1.0 / T
+        
+        if para == '1/P':
+            return 1.0 / P
+        
+        raise ValueError(f"Invalid parameter: {para}")
+    
     def choose_action(self, state):
         """
         The agent selects an action using the epsilon-greedy policy:
@@ -39,11 +56,5 @@ class QLearningAgent:
         return np.argmax(self.q_table[state])
     
     def learn(self, state, action, reward, next_state):
-        """
-        At each step, the agent:
-            1. Chooses an action.
-            2. Moves to the next state based on that action.
-            3. Updates the Q-value for the state-action pair using the Bellman formula.
-            4. Ends the episode if it reaches a terminal state, otherwise continues to the next step.
-        """
+        pass
         
