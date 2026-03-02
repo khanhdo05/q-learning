@@ -7,7 +7,7 @@ class TestBed:
     """
     A test bed for evaluating the performance of the Q-learning agent.
     """
-    def __init__(self, exp_id: int, gamma, alpha, epsilon, num_simulations=NUM_SIMS, E=E, seed=31):
+    def __init__(self, exp_id: int, gamma: float, alpha: float | str, epsilon: float | str, num_simulations=NUM_SIMS, E=E, seed=31):
         self.exp_id = exp_id
         self.gamma = gamma
         self.alpha = alpha
